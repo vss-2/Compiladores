@@ -4,6 +4,7 @@ import java.util.Stack;
 
 import postfix.ast.Expr.Binop;
 import postfix.ast.Expr.Number;
+import postfix.ast.Expr.Id;
 
 public class AstPrinter implements Expr.Visitor<String>{
 
@@ -20,6 +21,11 @@ public class AstPrinter implements Expr.Visitor<String>{
 	public String visitBinopExpr(Binop expr) {
 		return parenthesizePreOrder(expr.operator.lexeme,
 				expr.left, expr.right);
+	}
+	
+	@Override 
+	public String visitIdExpr(Id expr) {
+		return expr.id.toString();
 	}
 
 	// -------------------------------------------------------------

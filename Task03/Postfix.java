@@ -55,7 +55,7 @@ public class Postfix {
 //		args [0] = "../StackerPrograms/program/Calc1.stk";
 //		args [1] = "../StackerPrograms/program/Calc2.stk";
 
-		debugging = false; // for interpretation phases
+		debugging = true; // for interpretation phases
 		run(args, debugging);
 	}
 
@@ -102,7 +102,7 @@ public class Postfix {
 	private static void run(String source) {
 		try {
 			interpreter.env.put("y", "10");
-			Scanner scanner = new Scanner(source, interpreter.env);
+			Scanner scanner = new Scanner(source);
 			List<Token> tokens = scanner.scan();
 
 			// debugging for tokens

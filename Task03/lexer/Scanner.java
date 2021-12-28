@@ -28,11 +28,10 @@ public class Scanner {
 
 	private final String source;
 	private final List<Token> tokens = new ArrayList<>();
-	private final HashMap<String, String> hm;
-
-	public Scanner(String source, HashMap<String, String> hm) {
+	//private final HashMap<String, String> hm;
+	
+	public Scanner(String source) {
 		this.source = source;
-		this.hm = hm;
 	}
 
 	/**
@@ -77,8 +76,8 @@ public class Scanner {
 		else if(Regex.isOP(token)) {
 			ret = new Token(Regex.getOPTokenType(token), token);
 		}
-		else if(token.length() > 0 && hm.containsKey(token)) {
-			ret = new Token(TokenType.NUM, hm.get(token));
+		else if(Regex.isId(token)) {
+			ret = new Token(TokenType.ID, token);
 		}
 		else {
 			throw new LexError(token+" cannot be resolved!\n");

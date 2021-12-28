@@ -66,6 +66,13 @@ public class Interpreter implements Expr.Visitor<Integer> {
 
 		return result;
 	}
+	
+	@Override
+	public Integer visitIdExpr(Expr.Id expr) {
+		System.out.print("INT ");
+		//System.out.println(Integer.parseInt(env.get(String.valueOf(expr.id))));
+		return Integer.parseInt(env.get(String.valueOf(expr.id)));
+	}
 
 	private int evaluate(Expr expr) {
 		return expr.accept(this);
