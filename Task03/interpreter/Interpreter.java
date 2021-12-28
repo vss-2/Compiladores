@@ -17,7 +17,7 @@
 package postfix.interpreter;
 
 import java.util.HashMap;
-
+import postfix.lexer.LexError;
 import postfix.ast.Expr;
 
 /**
@@ -68,10 +68,14 @@ public class Interpreter implements Expr.Visitor<Integer> {
 	}
 	
 	@Override
-	public Integer visitIdExpr(Expr.Id expr) {
-		System.out.print("INT ");
-		//System.out.println(Integer.parseInt(env.get(String.valueOf(expr.id))));
-		return Integer.parseInt(env.get(String.valueOf(expr.id)));
+	public Integer visitIdExpr(Expr.Id expr) throws LexError {
+		// System.out.print("INT ");
+		// System.out.println(Integer.parseInt(env.get(String.valueOf(expr.id))));
+		try {
+			return Integer.parseInt(env.get(String.valueOf(expr.id)));
+		} catch (Exception e){
+			throw new LexError(String.valueOf(expr.id) + " cannot be resolved!\n");
+		}
 	}
 
 	private int evaluate(Expr expr) {
